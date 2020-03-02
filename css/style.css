@@ -1,0 +1,54 @@
+body{
+    width: 1300px;
+}
+
+header{
+    width: 1200px;
+    margin: auto;
+    height: 130px;
+    position: relative;
+    background-color: #738c8c;
+    
+}
+
+h1{
+    font-size: 70px;
+    position: absolute;
+    font-family: inherit;
+    margin: 20px 0 0 427px;
+    color: #e2e2e2;
+}
+h2{
+    font-size: 30px;
+    font-family: monospace;
+    margin: 27px 0 22px 82px;
+}
+
+p{
+    margin: 27px 0 20px 129px;
+    font-size: 20px;
+    font-family: monospace;
+}
+
+section{
+    display: flex;
+    position: absolute;
+    margin: 10px 0 0 50px;
+}
+
+#left_product_img{
+    width: 400px;
+    height: 400px;
+}
+#mid_product_img{
+    width: 400px;
+    height: 400px;
+}
+#right_product_img{
+    width: 400px;
+    height: 400px;
+}
+
+.mainEvent:active{
+    color: blue;
+}
