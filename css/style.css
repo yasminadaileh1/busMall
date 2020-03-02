@@ -54,3 +54,8 @@ section{
 .mainEvent:active{
     color: blue;
 }
+
+ul{
+    bottom: auto;
+    margin: 433px 0 0 0;
+}

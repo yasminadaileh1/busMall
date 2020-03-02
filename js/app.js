@@ -141,6 +141,7 @@ allPro.addEventListener('click', choice);
 
 function listResult(){
 
+
   var list = document.getElementById('listClick');
   for (var l=0; i<productImg.length;l++){
   var productName = document.createElement('li');
