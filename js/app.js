@@ -4,30 +4,76 @@ function randomProduct(min, max) {
 }
 
 
-var productImg = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg'];
-
+var productImg = [
+  'bag.jpg',
+  'banana.jpg',
+  'bathroom.jpg',
+  'boots.jpg',
+  'breakfast.jpg',
+  'bubblegum.jpg',
+  'chair.jpg',
+  'cthulhu.jpg',
+  'dog-duck.jpg',
+  'dragon.jpg',
+  'pen.jpg',
+  'pet-sweep.jpg',
+  'scissors.jpg',
+  'shark.jpg',
+  'sweep.png',
+  'tauntaun.jpg',
+  'unicorn.jpg',
+  'usb.gif',
+  'water-can.jpg',
+  'wine-glass.jpg'
+];
 var leftPro = document.getElementById('left_product_img');
 var midPro = document.getElementById('mid_product_img');
 var rightPro = document.getElementById('right_product_img');
-var allPro;
-// = document.getElementById('mainEvent').addEventListener('click', choice);
+var allPro = document.getElementById('mainEvent')
 
 var product = [];
 var clicks = 0;
 
-function Shopping(productId) {
-  this.productId = productId;
-  this.urlImage = `img/${this.productId}`;
+// var clickTime = 0 ;
 
+
+function Shopping(productId) {
+  this.productId = productId.split('.')[0];
+  this.urlImage = `img/${productId}`;
+  this.appear = 0;
+  this.clickTime = 0
   product.push(this);
+}
+
+for (let i = 0; i < productImg.length; i++) {
+  new Shopping(productImg[i]);
 
 }
 
-function randomProductImg() {
-
-  var leftProductImg = product[randomProduct(0, product.length - 1)];
+var leftProductImg = product[randomProduct(0, product.length - 1)];
   var midProductImg = product[randomProduct(0, product.length - 1)];
   var rightProductImg = product[randomProduct(0, product.length - 1)];
+
+
+
+
+  function randomProductImg() {
+
+  
+    leftProductImg = product[randomProduct(0, product.length - 1)];
+    midProductImg = product[randomProduct(0, product.length - 1)];
+    rightProductImg = product[randomProduct(0, product.length - 1)];
+
+    while (leftProductImg === midProductImg || midProductImg === rightProductImg || leftProductImg === rightProductImg ) {
+
+ 
+      leftProductImg = product[randomProduct(0, product.length - 1)];
+      midProductImg = product[randomProduct(0, product.length - 1)];
+      rightProductImg = product[randomProduct(0, product.length - 1)];
+  
+      
+  
+    }
 
   leftPro.setAttribute('src', leftProductImg.urlImage);
   leftPro.setAttribute('alt', leftProductImg.productId);
@@ -38,24 +84,13 @@ function randomProductImg() {
   rightPro.setAttribute('src', rightProductImg.urlImage);
   rightPro.setAttribute('alt', rightProductImg.productId);
 
-  while (leftProductImg === midProductImg || midProductImg === rightProductImg || leftProductImg === rightProductImg ) {
-
-    leftPro.setAttribute('src', leftProductImg.urlImage);
-    leftPro.setAttribute('alt', leftProductImg.productId);
   
-    midPro.setAttribute('src', midProductImg.urlImage);
-    midPro.setAttribute('alt', midProductImg.productId);
-  
-    rightPro.setAttribute('src', rightProductImg.urlImage);
-    rightPro.setAttribute('alt', rightProductImg.productId);
-    
-
-  }
 
 }
-for (let i = 0; i < productImg.length; i++) {
-  new Shopping(productImg[i]);
 
+
+for (var i = 0; i < productImg.length; i++) {
+  new Shopping(productImg[i]);
 }
 
 randomProductImg();
@@ -63,33 +98,90 @@ randomProductImg();
 
 
 
+ 
+  function choice(event){
+
+    if (event.target.id === 'left_product_img' || event.target.id === 'mid_product_img' || event.target.id === 'right_product_img') {
+      randomProductImg();
+      clicks++;
+      leftPro.appear++ ;
+      midPro.appear++ ;
+      rightPro.appear++ ;
+      // console.log(clicks);
+  
+    }
+
+     
+    //  for (let i = 0; i < product.length; i++) {
+     
+      if (event.target.id ==="left_product_img") {
+       leftPro.clickTime++ ;
+      }
+     
+      if (event.target.id ==="mid_product_img") {
+        midPro.clickTime ++ ;
+       }
+       if (event.target.id ==="right_product_img") {
+        rightPro.clickTime++ ;
+       }
+    
+    
+    
+    
 
 
-function choice(mainEvent) {
-  if (event.target.leftPro === 'left_product_img' || event.target.midPro === 'mid_product_img' || event.target.rightPro === 'right_product_img') {
-    randomProductImg();
-    clicks++;
-    console.log(clicks);
-
-  }
-  //  if (clicks == 25) {
-  //   leftPro.remove();
-  //   midPro.remove();
-  //   rightPro.remove();
-  //   alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
-
-  //  }
-  // allPro = document.getElementById('mainEvent').addEventListener('click', choice);
-
+if (clicks == 25) {
+  allPro.removeEventListener('click', choice);
+  alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
+  listResult();
+}
 
 }
-// choice();
+allPro.addEventListener('click', choice);
 
-var list = document.getElementById('listClick');
-var listOfProduct = document.createElement('ul');
-var productName = document.createElement('li');
-listOfProduct.appendChild(productName);
-productName.textContent = productImg + randomProductImg(product);
+function listResult(){
+
+  var list = document.getElementById('listClick');
+  for (var l=0; i<productImg.length;l++){
+  var productName = document.createElement('li');
+  list.appendChild(productName);
+  productName.textContent = `${product[i].productId} had ${product[i].clickTime}  click  ${product[i].appear} appear`;
+}}
 
 
+function chartPro(){
 
+  var productName = [];
+  var productClick = [];
+  for(var i = 0 ; i < product.length ; i++){
+    var productNaming = product[i].productId;
+    productName.push(productNaming);
+    var productClk = product[i].clickTime;
+    productClick.push(productClk);
+  }
+
+  var ctx = document.getElementById('product').getContext('2d');
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Votes',
+        data: productClick,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
