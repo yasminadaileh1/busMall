@@ -141,6 +141,7 @@ allPro.addEventListener('click', choice);
 
 function listResult(){
 
+
   var list = document.getElementById('listClick');
   for (var l=0; i<productImg.length;l++){
   var productName = document.createElement('li');
@@ -148,9 +149,40 @@ function listResult(){
   productName.textContent = `${product[i].productId} had ${product[i].clickTime}  click  ${product[i].appear} appear`;
 }}
 
-  
 
+function chartPro(){
 
+  var productName = [];
+  var productClick = [];
+  for(var i = 0 ; i < product.length ; i++){
+    var productNaming = product[i].productId;
+    productName.push(productNaming);
+    var productClk = product[i].clickTime;
+    productClick.push(productClk);
+  }
 
+  var ctx = document.getElementById('product').getContext('2d');
 
-
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productName,
+      datasets: [{
+        label: '# of Votes',
+        data: productClick,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
