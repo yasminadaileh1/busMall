@@ -35,14 +35,14 @@ var allPro = document.getElementById('mainEvent')
 var product = [];
 var clicks = 0;
 
-// var clickTime = 0 ;
+
 
 
 function Shopping(productId) {
   this.productId = productId.split('.')[0];
   this.urlImage = `img/${productId}`;
   this.appear = 0;
-  this.clickTime = 0
+  this.clickTime = 0;
   product.push(this);
 }
 
@@ -74,8 +74,8 @@ function randomProductImg() {
 
 
 
+  
   }
-
   leftPro.setAttribute('src', leftProductImg.urlImage);
   leftPro.setAttribute('alt', leftProductImg.productId);
   leftProductImg.appear++;
@@ -92,10 +92,6 @@ function randomProductImg() {
 }
 
 
-for (var i = 0; i < productImg.length; i++) {
-  new Shopping(productImg[i]);
-}
-
 randomProductImg();
 
 
@@ -107,16 +103,15 @@ function choice(event) {
   if (event.target.id === 'left_product_img' || event.target.id === 'mid_product_img' || event.target.id === 'right_product_img') {
     randomProductImg();
     clicks++;
-    // console.log(clicks);
 
   }
 
 
-  //  for (let i = 0; i < product.length; i++) {
+ 
 
   if (event.target.id === "left_product_img") {
     leftProductImg.clickTime++;
-    //  console.log(leftPro.clickTime);
+ 
   }
 
   if (event.target.id === "mid_product_img") {
@@ -136,6 +131,7 @@ function choice(event) {
     allPro.removeEventListener('click', choice);
     alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
     listResult();
+    chartPro();
   }
 
 }
@@ -143,17 +139,11 @@ allPro.addEventListener('click', choice);
 
 function listResult() {
 
+
   var list = document.getElementById('listClick');
-  for (var i = 0; i < productImg.length; i++) {
+  for (var i = 0; i < product.length; i++) {
     var productName = document.createElement('li');
     list.appendChild(productName);
     productName.textContent = `${product[i].productId} had ${product[i].clickTime}  click  ${product[i].appear} appear`;
   }
 }
-
-// listResult();
-
-
-
-
-
