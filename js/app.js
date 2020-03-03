@@ -26,6 +26,7 @@ var productImg = [
   'water-can.jpg',
   'wine-glass.jpg'
 ];
+
 var leftPro = document.getElementById('left_product_img');
 var midPro = document.getElementById('mid_product_img');
 var rightPro = document.getElementById('right_product_img');
@@ -51,40 +52,42 @@ for (let i = 0; i < productImg.length; i++) {
 }
 
 var leftProductImg = product[randomProduct(0, product.length - 1)];
-  var midProductImg = product[randomProduct(0, product.length - 1)];
-  var rightProductImg = product[randomProduct(0, product.length - 1)];
+var midProductImg = product[randomProduct(0, product.length - 1)];
+var rightProductImg = product[randomProduct(0, product.length - 1)];
 
 
 
 
-  function randomProductImg() {
+function randomProductImg() {
 
-  
+
+  leftProductImg = product[randomProduct(0, product.length - 1)];
+  midProductImg = product[randomProduct(0, product.length - 1)];
+  rightProductImg = product[randomProduct(0, product.length - 1)];
+
+  while (leftProductImg === midProductImg || midProductImg === rightProductImg || leftProductImg === rightProductImg) {
+
+
     leftProductImg = product[randomProduct(0, product.length - 1)];
     midProductImg = product[randomProduct(0, product.length - 1)];
     rightProductImg = product[randomProduct(0, product.length - 1)];
 
-    while (leftProductImg === midProductImg || midProductImg === rightProductImg || leftProductImg === rightProductImg ) {
 
- 
-      leftProductImg = product[randomProduct(0, product.length - 1)];
-      midProductImg = product[randomProduct(0, product.length - 1)];
-      rightProductImg = product[randomProduct(0, product.length - 1)];
-  
-      
-  
-    }
+
+  }
 
   leftPro.setAttribute('src', leftProductImg.urlImage);
   leftPro.setAttribute('alt', leftProductImg.productId);
+  leftProductImg.appear++;
 
   midPro.setAttribute('src', midProductImg.urlImage);
   midPro.setAttribute('alt', midProductImg.productId);
+  midProductImg.appear++;
 
   rightPro.setAttribute('src', rightProductImg.urlImage);
   rightPro.setAttribute('alt', rightProductImg.productId);
+  rightProductImg.appear++;
 
-  
 
 }
 
@@ -98,57 +101,57 @@ randomProductImg();
 
 
 
- 
-  function choice(event){
 
-    if (event.target.id === 'left_product_img' || event.target.id === 'mid_product_img' || event.target.id === 'right_product_img') {
-      randomProductImg();
-      clicks++;
-      leftPro.appear++ ;
-      midPro.appear++ ;
-      rightPro.appear++ ;
-      // console.log(clicks);
-  
-    }
+function choice(event) {
 
-     
-    //  for (let i = 0; i < product.length; i++) {
-     
-      if (event.target.id ==="left_product_img") {
-       leftPro.clickTime++ ;
-      }
-     
-      if (event.target.id ==="mid_product_img") {
-        midPro.clickTime ++ ;
-       }
-       if (event.target.id ==="right_product_img") {
-        rightPro.clickTime++ ;
-       }
-    
-    
-    
-    
+  if (event.target.id === 'left_product_img' || event.target.id === 'mid_product_img' || event.target.id === 'right_product_img') {
+    randomProductImg();
+    clicks++;
+    // console.log(clicks);
+
+  }
 
 
-if (clicks == 25) {
-  allPro.removeEventListener('click', choice);
-  alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
-  listResult();
-}
+  //  for (let i = 0; i < product.length; i++) {
+
+  if (event.target.id === "left_product_img") {
+    leftProductImg.clickTime++;
+    //  console.log(leftPro.clickTime);
+  }
+
+  if (event.target.id === "mid_product_img") {
+    midProductImg.clickTime++;
+  }
+
+  if (event.target.id === "right_product_img") {
+    rightProductImg.clickTime++;
+  }
+
+
+
+
+
+
+  if (clicks == 25) {
+    allPro.removeEventListener('click', choice);
+    alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
+    listResult();
+  }
 
 }
 allPro.addEventListener('click', choice);
 
-function listResult(){
+function listResult() {
 
   var list = document.getElementById('listClick');
-  for (var l=0; i<productImg.length;l++){
-  var productName = document.createElement('li');
-  list.appendChild(productName);
-  productName.textContent = `${product[i].productId} had ${product[i].clickTime}  click  ${product[i].appear} appear`;
-}}
+  for (var i = 0; i < productImg.length; i++) {
+    var productName = document.createElement('li');
+    list.appendChild(productName);
+    productName.textContent = `${product[i].productId} had ${product[i].clickTime}  click  ${product[i].appear} appear`;
+  }
+}
 
-  
+// listResult();
 
 
 
