@@ -2,6 +2,7 @@ body{
     width: 1300px;
     height: 3000px;
     margin: auto;
+    background: radial-gradient(#DBFFE1, #fff) fixed;
 }
 
 header{
@@ -39,18 +40,24 @@ section{
 }
 
 #left_product_img{
-    width: 400px;
-    height: 400px;
+    width: 100px;
+    height: 100px;
 }
 #mid_product_img{
-    width: 400px;
-    height: 400px;
+    width: 100px;
+    height: 100px;
 }
 #right_product_img{
-    width: 400px;
-    height: 400px;
+    width: 100px;
+    height: 100px;
 }
 
-.mainEvent:active{
-    color: blue;
+.mainEvent{
+    height: 100px;
+    width: 100px;
+}
+
+ul{
+    bottom: auto;
+    margin: 433px 0 0 0;
 }
