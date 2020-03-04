@@ -34,6 +34,7 @@ var allPro = document.getElementById('mainEvent')
 
 var product = [];
 var clicks = 0;
+var clickTime = [];
 
 // var clickTime = 0 ;
 
@@ -44,7 +45,10 @@ function Shopping(productId) {
   this.appear = 0;
   this.clickTime = 0;
   product.push(this);
+ 
 }
+
+
 
 for (let i = 0; i < productImg.length; i++) {
   new Shopping(productImg[i]);
@@ -134,6 +138,7 @@ function choice(event) {
     listResult();
     chartPro();
   }
+  setItem();
 
 }
 allPro.addEventListener('click', choice);
@@ -208,3 +213,20 @@ function chartPro(){
     }
   });
 }
+
+function setItem(){
+  var SetProductAppearInRaounds = JSON.stringify(product);
+  localStorage.setItem('timeAppeared', SetProductAppearInRaounds);
+  var SetProductClickInRounds =  JSON.stringify(clicks);
+  localStorage.setItem('timeclicked', SetProductClickInRounds);
+}
+
+function getItem(){
+  var SetProductAppearInRaounds = localStorage.getItem('timeAppeared');
+  product = JSON.parse(SetProductAppearInRaounds);
+  var SetProductClickInRounds = localStorage.getItem('timeclicked');
+  clicks = JSON.parse(SetProductClickInRounds);
+  listResult();
+}
+
+getItem();
