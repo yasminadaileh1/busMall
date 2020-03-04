@@ -35,6 +35,7 @@ var allPro = document.getElementById('mainEvent')
 var product = [];
 var clicks = 0;
 
+
 // var clickTime = 0 ;
 
 
@@ -44,7 +45,10 @@ function Shopping(productId) {
   this.appear = 0;
   this.clickTime = 0;
   product.push(this);
+ 
 }
+
+
 
 for (let i = 0; i < productImg.length; i++) {
   new Shopping(productImg[i]);
@@ -108,8 +112,8 @@ function choice(event) {
   }
 
 
- 
-
+//  randomProductImg();
+// clicks++;
   if (event.target.id === "left_product_img") {
     leftProductImg.clickTime++;
     //  console.log(leftPro.clickTime);
@@ -128,15 +132,16 @@ function choice(event) {
 
 
 
-  if (clicks == 25) {
+  if (clicks === 25) {
     allPro.removeEventListener('click', choice);
     alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
     listResult();
     chartPro();
   }
-
+  
 }
 allPro.addEventListener('click', choice);
+setItem();
 
 function listResult() {
 
@@ -208,3 +213,20 @@ function chartPro(){
     }
   });
 }
+
+function setItem(){
+  var SetProductAppearInRaounds = JSON.stringify(product);
+  localStorage.setItem('timeAppeared', SetProductAppearInRaounds);
+  var SetProductClickInRounds =  JSON.stringify(clicks);
+  localStorage.setItem('timeclicked', SetProductClickInRounds);
+}
+
+function getItem(){
+  var SetProductAppearInRaounds = localStorage.getItem('timeAppeared');
+  product = JSON.parse(SetProductAppearInRaounds);
+  var SetProductClickInRounds = localStorage.getItem('timeclicked');
+  clicks = JSON.parse(SetProductClickInRounds);
+  listResult();
+}
+
+getItem();
