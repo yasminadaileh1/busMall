@@ -138,10 +138,10 @@ function choice(event) {
     listResult();
     chartPro();
   }
-
+  setItem();
 }
 allPro.addEventListener('click', choice);
-setItem();
+
 
 function listResult() {
 
@@ -217,20 +217,19 @@ function chartPro(){
 function setItem(){
   var SetProductAppearInRaounds = JSON.stringify(product);
   localStorage.setItem('timeAppeared', SetProductAppearInRaounds);
-  var SetProductClickInRounds =  JSON.stringify(clicks);
-  localStorage.setItem('timeclicked', SetProductClickInRounds);
+ 
 }
 
 function getItem(){
   var SetProductAppearInRaounds = localStorage.getItem('timeAppeared');
-  product = JSON.parse(SetProductAppearInRaounds);
-  var SetProductClickInRounds = localStorage.getItem('timeclicked');
-  clicks = JSON.parse(SetProductClickInRounds);
-  if(SetProductAppearInRaounds === null){
+  if(SetProductAppearInRaounds){
     product = JSON.parse(SetProductAppearInRaounds);
-    clicks = JSON.parse(SetProductClickInRounds);
+
   }
-  listResult();
+  
 }
+
+
+
 
 getItem();
