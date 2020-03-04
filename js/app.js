@@ -226,6 +226,10 @@ function getItem(){
   product = JSON.parse(SetProductAppearInRaounds);
   var SetProductClickInRounds = localStorage.getItem('timeclicked');
   clicks = JSON.parse(SetProductClickInRounds);
+  if(SetProductAppearInRaounds === null){
+    product = JSON.parse(SetProductAppearInRaounds);
+    clicks = JSON.parse(SetProductClickInRounds);
+  }
   listResult();
 }
 
