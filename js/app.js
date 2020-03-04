@@ -34,7 +34,7 @@ var allPro = document.getElementById('mainEvent')
 
 var product = [];
 var clicks = 0;
-var clickTime = [];
+
 
 // var clickTime = 0 ;
 
@@ -112,8 +112,8 @@ function choice(event) {
   }
 
 
- 
-
+//  randomProductImg();
+// clicks++;
   if (event.target.id === "left_product_img") {
     leftProductImg.clickTime++;
     //  console.log(leftPro.clickTime);
@@ -132,17 +132,17 @@ function choice(event) {
 
 
 
-  if (clicks == 25) {
+  if (clicks === 25) {
     allPro.removeEventListener('click', choice);
     alert('you have reach to maximum number of unit your product in cart and it will shown down in the table');
     listResult();
     chartPro();
   }
-  setItem();
+
 
 }
 allPro.addEventListener('click', choice);
-
+setItem();
 function listResult() {
 
 
