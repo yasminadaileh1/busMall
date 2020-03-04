@@ -138,7 +138,7 @@ function choice(event) {
     listResult();
     chartPro();
   }
-  
+
 }
 allPro.addEventListener('click', choice);
 setItem();
